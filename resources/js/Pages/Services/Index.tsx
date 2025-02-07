@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Frontend from '@/Layouts/FrontendLayout';
 import { Head, Link,useForm } from '@inertiajs/react';
 import FAQPage from '@/Components/Frontend/Pages/Faq';
@@ -7,7 +7,7 @@ const ServicesIndex: React.FC = () => {
     const { data, setData, post, processing, errors } = useForm({
         email: '',
       });
-      const handleSubmit = (e) => {
+      const handleSubmit = (e:FormEvent) => {
         e.preventDefault();
         post(route('newsletter.subscribe'), {
           onSuccess: () => {

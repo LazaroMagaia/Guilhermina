@@ -14,11 +14,16 @@ export default function Login({
     status?: string;
     canResetPassword: boolean;
 }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm<{
+        email: string;
+        password: string;
+        remember: boolean; // Certifica-te de que este campo é booleano
+    }>({
         email: '',
         password: '',
-        remember: false,
+        remember: false, // Agora o TypeScript reconhecerá que pode ser true ou false
     });
+    
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();

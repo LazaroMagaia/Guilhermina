@@ -1,7 +1,7 @@
 import React from 'react';
-import { useForm,usePage,Link,Head } from '@inertiajs/react';
+import { useForm, usePage, Link, Head } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { PageProps,Product } from '@/types';
+import { PageProps, Product } from '@/types';
 
 interface StockEntryFormProps {
   productId: number;
@@ -9,7 +9,7 @@ interface StockEntryFormProps {
 
 const StockEntry: React.FC<StockEntryFormProps> = () => {
   const { props } = usePage<PageProps<{ product: Product }>>();
-  const { product} = props
+  const { product } = props;
   const { data, setData, put, processing, errors } = useForm({
     quantity: 0,
     price: '',
@@ -19,8 +19,7 @@ const StockEntry: React.FC<StockEntryFormProps> = () => {
     e.preventDefault();
 
     // Enviar os dados para o backend via Inertia
-    put(route('admin.stock.increase',product.id), {
-      data,
+    put(route('admin.stock.increase', product.id), {
       onSuccess: () => {
         // Resetar os campos após sucesso
         setData('quantity', 0);
@@ -28,13 +27,13 @@ const StockEntry: React.FC<StockEntryFormProps> = () => {
       },
       onError: (errors) => {
         if (errors) {
-            let errorMessage = 'Ocorreram os seguintes erros:\n';
-            Object.keys(errors).forEach((field) => {
-                errorMessage += `- ${errors[field]}\n`;
-            });
-            alert(errorMessage);
+          let errorMessage = 'Ocorreram os seguintes erros:\n';
+          Object.keys(errors).forEach((field) => {
+            errorMessage += `- ${errors[field]}\n`;
+          });
+          alert(errorMessage);
         }
-      },     
+      },
     });
   };
 
@@ -42,8 +41,8 @@ const StockEntry: React.FC<StockEntryFormProps> = () => {
     <AdminLayout>
       <Head title="Registrar Movimento de Entrada de Estoque" />
       <div className="container mx-auto p-6">
-        <h2 className="text-2xl font-semibold mb-4">Registrar Movimento de Entrada de Estoque
-          do produto {product.name}
+        <h2 className="text-2xl font-semibold mb-4">
+          Registrar Movimento de Entrada de Estoque do produto {product.name}
         </h2>
 
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6">
@@ -87,7 +86,6 @@ const StockEntry: React.FC<StockEntryFormProps> = () => {
               {errors.price && <p className="text-sm text-red-500">{errors.price}</p>}
             </div>
           */}
-          
 
           {/* Botão de submissão */}
           <div className="flex justify-end">
@@ -98,10 +96,11 @@ const StockEntry: React.FC<StockEntryFormProps> = () => {
             >
               {processing ? 'Registrando...' : 'Registrar Entrada'}
             </button>
-            <Link href={route('admin.stock')} className="px-4 py-[10px] bg-gray-600 text-white font-semibold rounded-lg 
-                shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 
-                focus:ring-gray-500 ml-2">
-                 {processing ? 'Registrando...' : 'Cancelar'}
+            <Link
+              href={route('admin.stock')}
+              className="px-4 py-[10px] bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ml-2"
+            >
+              {processing ? 'Registrando...' : 'Cancelar'}
             </Link>
           </div>
         </form>

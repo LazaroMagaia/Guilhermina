@@ -20,7 +20,6 @@ const StockOut: React.FC<StockEntryFormProps> = () => {
 
     // Enviar os dados para o backend via Inertia
     put(route('admin.stock.decrease',product.id), {
-      data,
       onSuccess: () => {
         // Resetar os campos após sucesso
         setData('quantity', 0);

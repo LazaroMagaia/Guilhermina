@@ -5,7 +5,7 @@ import { Stock,PageProps } from "@/types";
 import DeleteModal from "../Modals/Delete";
 const Index: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { props } = usePage<PageProps<{ stocks: Stock }>>();
+    const { props } = usePage<PageProps<{ stocks: Stock[] }>>();
     const { stocks} = props;
 
       const [selectedStock, setSelectedStock] = useState<Stock | null>(null);

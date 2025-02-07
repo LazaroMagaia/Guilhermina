@@ -18,6 +18,7 @@ const CreateProduct: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+
         const formData = new FormData(e.target as HTMLFormElement);
         formData.append("name", data.name);
         formData.append("description", data.description);
@@ -30,7 +31,19 @@ const CreateProduct: React.FC = () => {
         }
         formData.append("category_id", data.category_id);
 
-        post(route("admin.products.store"), formData);
+        // Usar o fetch diretamente para enviar o FormData
+        fetch(route("admin.products.store"), {
+            method: "POST",
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Processar resposta após envio, pode usar o Swal ou qualquer outro tratamento aqui
+                console.log(data);
+            })
+            .catch(error => {
+                console.error("Erro ao enviar produto", error);
+            });
     };
 
     return (

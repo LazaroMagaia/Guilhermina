@@ -1,6 +1,7 @@
 import { useForm, Head, usePage } from '@inertiajs/react';
 import Frontend from '@/Layouts/FrontendLayout';
 import Swal from 'sweetalert2';
+import { FormEvent } from 'react';
 
 export default function ContactPage() {
     const { data, setData, post, processing, errors } = useForm({
@@ -9,14 +10,14 @@ export default function ContactPage() {
         eventType: '',
         location: '',
         preferences: '',
-        file: null,
-        meeting: false, // Adiciona o campo para o checkbox
+        file: null as File | null, 
+        meeting: false as boolean, 
     });
 
-    const submitForm = (e) => {
+    const submitForm = (e: FormEvent) => {
         e.preventDefault();
         post(route("contact.send"), { 
-            data, 
+            preserveScroll: true,
             onSuccess: () => {
                 setData({
                     name: "",
@@ -166,7 +167,10 @@ export default function ContactPage() {
                                 <input 
                                     type="file" 
                                     name="file"
-                                    onChange={e => setData('file', e.target.files[0])}
+                                    onChange={e => {
+                                        const file = e.target.files ? e.target.files[0] : null;
+                                        setData('file', file);
+                                    }}
                                     className="w-full border p-2 rounded text-gray-900"
                                 />
                                 {errors.file && <div className="text-red-500">{errors.file}</div>}
