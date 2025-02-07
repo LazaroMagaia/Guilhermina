@@ -1,0 +1,1 @@
+import{j as o,$ as t}from"./app-DqhGHzoz.js";import{A as e}from"./AdminLayout-D05e8_fH.js";const a=()=>o.jsxs(e,{children:[o.jsx("h1",{children:"Admin Dashboard"}),o.jsx("p",{children:"Welcome to the admin dashboard page."}),o.jsx(t,{href:route("logout"),method:"post",as:"button",children:"Log Out"})]});export{a as default};

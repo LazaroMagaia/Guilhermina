@@ -1,0 +1,1 @@
+import{j as s,L as e,$ as o}from"./app-DqhGHzoz.js";import{A as t}from"./AdminLayout-D05e8_fH.js";const d=()=>s.jsxs(t,{children:[s.jsx(e,{title:"Usuarios"}),s.jsx("h1",{children:"User Dashboard"}),s.jsx("p",{children:"Welcome to the user dashboard page."}),s.jsx(o,{href:route("logout"),method:"post",as:"button",children:"Log Out"})]});export{d as default};
